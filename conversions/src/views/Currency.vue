@@ -48,7 +48,10 @@ export default {
         convert () {
             this.$store.dispatch('convert')
         },
-    }    
+    },
+    created() {
+         this.$store.dispatch('loadCurrencies')
+    }   
 }
 </script>
 

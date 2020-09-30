@@ -7,7 +7,7 @@ export default createStore({
       inputAmount: null,
       inputCurrency: null,
       outputCurrency: null,      
-      currencies: ['GBP', 'AUD'],
+      currencies: [],
       result: null
     }
   },
@@ -24,8 +24,20 @@ export default createStore({
     updateResult (state, result) {
       state.currency.result = result
     },
+    updateCurrencies (state, currencies) {
+      state.currency.currencies = currencies  
+    },    
   },
   actions: {
+    loadCurrencies() {
+      Axios.get(`https://localhost:64400/currency`).then(
+        response => {
+          this.commit('updateCurrencies', response.data)
+        }
+      ).catch((e) => {
+        console.log(e);
+      })
+    },
     convert() {
       Axios.get(`https://localhost:64400/currency/Convert?inputCurrency=${this.state.currency.inputCurrency}&outputCurrency=${this.state.currency.outputCurrency}&value=${this.state.currency.inputAmount}`).then(
         response => {
