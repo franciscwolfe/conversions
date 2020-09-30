@@ -3,19 +3,19 @@
         <div>
             Convert
             <input :value="inputAmount"  @input="updateInputAmount" placeholder="enter amount">
-            <select :value="inputCurrency"  @input="updateInputCurrency">
+            <select :value="inputCurrency"  @input="updateInputCurrency" id="input_currency">
                 <option v-for="option in currencies" :value="option" :key="option">
                     {{ option }}
                 </option>
             </select> to 
-            <select :value="outputCurrency"  @input="updateOutputCurrency">
+            <select :value="outputCurrency"  @input="updateOutputCurrency" id="output_currency">
                 <option v-for="option in currencies" :value="option" :key="option">
                     {{ option }}
                 </option>
             </select>
-            <button @click="convert" type="submit" :disabled="!valid">Convert</button>
+            <button @click="convert" type="submit" :disabled="!valid" id="convert">Convert</button>
         </div>
-        <div>
+        <div id="result">
             {{ result }}
         </div>
     </form>
