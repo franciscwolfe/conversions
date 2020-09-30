@@ -1,18 +1,23 @@
 <template>
     <form onsubmit="return false;">
-        Convert
-        <input :value="inputAmount"  @input="updateInputAmount" placeholder="enter amount">
-        <select :value="inputCurrency"  @input="updateInputCurrency">
-            <option v-for="option in currencies" :value="option" :key="option">
-                {{ option }}
-            </option>
-        </select> to 
-        <select :value="outputCurrency"  @input="updateOutputCurrency">
-            <option v-for="option in currencies" :value="option" :key="option">
-                {{ option }}
-            </option>
-        </select>
-        <button @click="convert" type="submit">Convert</button>
+        <div>
+            Convert
+            <input :value="inputAmount"  @input="updateInputAmount" placeholder="enter amount">
+            <select :value="inputCurrency"  @input="updateInputCurrency">
+                <option v-for="option in currencies" :value="option" :key="option">
+                    {{ option }}
+                </option>
+            </select> to 
+            <select :value="outputCurrency"  @input="updateOutputCurrency">
+                <option v-for="option in currencies" :value="option" :key="option">
+                    {{ option }}
+                </option>
+            </select>
+            <button @click="convert" type="submit">Convert</button>
+        </div>
+        <div>
+            {{ result }}
+        </div>
     </form>
 </template>
 
@@ -26,7 +31,8 @@ export default {
             inputAmount: state => state.currency.inputAmount,
             inputCurrency: state => state.currency.inputCurrency,
             outputCurrency: state => state.currency.outputCurrency,
-            currencies: state => state.currency.currencies
+            currencies: state => state.currency.currencies,
+            result: state => state.currency.result
         })
     },
     methods: {
@@ -39,8 +45,8 @@ export default {
         updateOutputCurrency (e) {
             this.$store.commit('updateOutputCurrency', e.target.value)
         },
-        convert (e) {
-            this.$store.commit('convert', e.target.value)
+        convert () {
+            this.$store.dispatch('convert')
         },
     }    
 }
