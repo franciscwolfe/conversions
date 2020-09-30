@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <form onsubmit="return false;">
         Convert
-        <input :value="inputAmount"  @input="updateInputAmount" placeholder="edit me">
+        <input :value="inputAmount"  @input="updateInputAmount" placeholder="enter amount">
         <select :value="inputCurrency"  @input="updateInputCurrency">
             <option v-for="option in currencies" :value="option" :key="option">
                 {{ option }}
@@ -12,7 +12,8 @@
                 {{ option }}
             </option>
         </select>
-    </div>
+        <button @click="convert" type="submit">Convert</button>
+    </form>
 </template>
 
 <script>
@@ -37,7 +38,10 @@ export default {
         },        
         updateOutputCurrency (e) {
             this.$store.commit('updateOutputCurrency', e.target.value)
-        }        
+        },
+        convert (e) {
+            this.$store.commit('convert', e.target.value)
+        },
     }    
 }
 </script>

@@ -19,6 +19,8 @@ export default createStore({
     },
     updateOutputCurrency (state, outputCurrency) {
       state.currency.outputCurrency = outputCurrency
+    },
+    convert() {
     }
   },
   actions: {
