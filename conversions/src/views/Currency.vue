@@ -13,7 +13,7 @@
                     {{ option }}
                 </option>
             </select>
-            <button @click="convert" type="submit">Convert</button>
+            <button @click="convert" type="submit" :disabled="!valid">Convert</button>
         </div>
         <div>
             {{ result }}
@@ -28,6 +28,9 @@ export default {
   name: 'Currency',
     computed: {
         ...mapState({
+            valid: state => /^[0-9]+.?[0-9]?[0-9]?$/.test(state.currency.inputAmount)
+             && state.currency.inputCurrency
+              && state.currency.outputCurrency,
             inputAmount: state => state.currency.inputAmount,
             inputCurrency: state => state.currency.inputCurrency,
             outputCurrency: state => state.currency.outputCurrency,

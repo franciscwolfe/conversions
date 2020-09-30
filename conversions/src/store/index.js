@@ -32,6 +32,7 @@ export default createStore({
     loadCurrencies() {
       Axios.get(`https://localhost:64400/currency`).then(
         response => {
+          response.data.unshift('');
           this.commit('updateCurrencies', response.data)
         }
       ).catch((e) => {
