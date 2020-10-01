@@ -15,9 +15,11 @@
             </select>
             <button @click="convert" type="submit" :disabled="!valid" id="convert">Convert</button>
         </div>
-        <div id="result">
-            {{ result }}
-        </div>
+        <h1>
+            <div id="result">
+                {{ result }}
+            </div>
+        </h1>
     </form>
 </template>
 

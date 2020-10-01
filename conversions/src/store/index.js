@@ -40,9 +40,13 @@ export default createStore({
       })
     },
     convert() {
-      Axios.get(`https://localhost:64400/currency/Convert?inputCurrency=${this.state.currency.inputCurrency}&outputCurrency=${this.state.currency.outputCurrency}&value=${this.state.currency.inputAmount}`).then(
+      var searchInputCurrency = this.state.currency.inputCurrency;
+      var searchOutputCurrency = this.state.currency.outputCurrency;
+      var searchInputAmount = this.state.currency.inputAmount;
+
+      Axios.get(`https://localhost:64400/currency/Convert?inputCurrency=${searchInputCurrency}&outputCurrency=${searchOutputCurrency}&value=${searchInputAmount}`).then(
         response => {
-          this.commit('updateResult', response.data)
+          this.commit('updateResult', `${searchInputCurrency}${'\xa0'}${Number(searchInputAmount).toFixed(2)} = ${searchOutputCurrency}${'\xa0'}${response.data}`)
         }
       ).catch((e) => {
         console.log(e);
