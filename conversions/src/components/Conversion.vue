@@ -48,20 +48,20 @@ export default {
     },
     methods: {
         updateInputAmount (e) {
-            this.$store.commit('updateInputAmount', e.target.value)
+            this.$store.commit(`${this.stateModule}/updateInputAmount`, e.target.value)
         },
         updateInputType (e) {
-            this.$store.commit('updateInputType', e.target.value)
+            this.$store.commit(`${this.stateModule}/updateInputType`, e.target.value)
         },        
         updateOutputType (e) {
-            this.$store.commit('updateOutputType', e.target.value)
+            this.$store.commit(`${this.stateModule}/updateOutputType`, e.target.value)
         },
         convert () {
-            this.$store.dispatch('convert')
+            this.$store.dispatch(`${this.stateModule}/convert`)
         },
     },
     created() {
-         this.$store.dispatch('loadTypes')
+         this.$store.dispatch(`${this.stateModule}/loadTypes`)
     }   
 }
 </script>

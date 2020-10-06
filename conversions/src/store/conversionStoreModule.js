@@ -1,4 +1,5 @@
-export default class ConversionStore {
+export default class ConversionStoreModule {
+    namespaced = true;
     state = {
         inputAmount: null,
         inputType: null,

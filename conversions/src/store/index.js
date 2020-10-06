@@ -1,8 +1,10 @@
 import { createStore } from 'vuex'
-import CurrencyConversionStore from './currencyConversionStore'
+import CurrencyConversionStoreModule from './currencyConversionStoreModule'
+import TemperatureConversionStoreModule from './temperatureConversionStoreModule'
 
 export default createStore({
   modules: {
-    currency:  new CurrencyConversionStore()
+    currency:  new CurrencyConversionStoreModule(),
+    temperature:  new TemperatureConversionStoreModule()
   }
 })

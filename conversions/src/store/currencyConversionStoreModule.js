@@ -1,13 +1,13 @@
-import ConversionStore from './conversionStore'
+import ConversionStoreModule from './conversionStoreModule'
 import Axios from 'axios'
 
-export default class CurrencyConversionStore extends ConversionStore {
+export default class CurrencyConversionStoreModule extends ConversionStoreModule {
     actions = {
         loadTypes() {
           Axios.get(`https://localhost:54112/currency`).then(
             response => {
               response.data.unshift('');
-              this.commit('updateTypes', response.data)
+              this.commit('currency/updateTypes', response.data, { root: true })
             }
           ).catch((e) => {
             console.log(e);
@@ -20,7 +20,9 @@ export default class CurrencyConversionStore extends ConversionStore {
     
           Axios.get(`https://localhost:54112/currency/Convert?inputCurrency=${searchInputType}&outputCurrency=${searchOutputType}&value=${searchInputAmount}`).then(
             response => {
-              this.commit('updateResult', `${searchInputType}${'\xa0'}${Number(searchInputAmount).toFixed(2)} = ${searchOutputType}${'\xa0'}${response.data}`)
+              this.commit('currency/updateResult', 
+              `${searchInputType}${'\xa0'}${Number(searchInputAmount).toFixed(2)} = ${searchOutputType}${'\xa0'}${response.data}`,
+              { root: true });
             }
           ).catch((e) => {
             console.log(e);
