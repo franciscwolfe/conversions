@@ -8,18 +8,18 @@ const units = {
 
 export default class TemperatureConversionStoreModule extends ConversionStoreModule {
     actions = {
-        loadTypes() {
+        loadTypes(state, modulePath) {
           var types = Object.keys(units);
           types.unshift(' ');
-          this.commit('temperature/updateTypes', ['','C','F','K'], { root: true });
+          this.commit(`${modulePath}/updateTypes`, ['','C','F','K'], { root: true });
         },
-        convert({state}) {
+        convert({state}, modulePath) {
           var searchInputType = state.inputType;
           var searchOutputType = state.outputType;
           var searchInputAmount = state.inputAmount;
               
           var result = 10;
-          this.commit('temperature/updateResult',
+          this.commit(`${modulePath}/updateResult`,
           `${searchInputAmount}${searchInputType} = ${result}${searchOutputType}`,
           { root: true })
         }

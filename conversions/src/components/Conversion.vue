@@ -57,11 +57,11 @@ export default {
             this.$store.commit(`${this.stateModule}/updateOutputType`, e.target.value)
         },
         convert () {
-            this.$store.dispatch(`${this.stateModule}/convert`)
+            this.$store.dispatch(`${this.stateModule}/convert`, this.stateModule)
         },
     },
     created() {
-         this.$store.dispatch(`${this.stateModule}/loadTypes`)
+         this.$store.dispatch(`${this.stateModule}/loadTypes`, this.stateModule)
     }   
 }
 </script>
