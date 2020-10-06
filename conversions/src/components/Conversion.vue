@@ -1,5 +1,4 @@
 <template>
-    <Conversion></Conversion>
     <form onsubmit="return false;">
         <div>
             Convert
@@ -26,13 +25,13 @@
 
 <script>
 import { mapState } from 'vuex'
-import Conversion from '@/components/Conversion.vue'
+
+var stateModule = "currency";
 
 export default {
-  name: 'Currency',
+  name: 'Conversion',
   components: {
-    Conversion
-  },  
+ },  
     computed: {
         ...mapState({
             valid: state => /^[0-9]+.?[0-9]?[0-9]?$/.test(state.currency.inputAmount)

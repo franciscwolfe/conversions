@@ -1,0 +1,53 @@
+[33mcommit 44571d05a68ad8427b2bb2356bdb7243db6ff9d5[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Tue Oct 6 13:30:13 2020 +0100
+
+    Fixed test
+
+[33mcommit 0fde1fd877ee7ae72159fda1e1c871bbac5efd41[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Thu Oct 1 10:46:43 2020 +0100
+
+    Expanded result message
+
+[33mcommit 79c0c40ae174d7a164379d95fdfa9894d74e1c29[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Wed Sep 30 21:32:22 2020 +0100
+
+    added some cypress tests
+
+[33mcommit 6be08d71c7a8fb6f16afbdd831213183c7c426ac[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Wed Sep 30 20:49:03 2020 +0100
+
+    Added simple regex validation
+
+[33mcommit 018e4f09f1b95684f3a41eea401358233b06ba70[m[33m ([m[1;32mvalidation[m[33m)[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Wed Sep 30 18:00:07 2020 +0100
+
+    uses server list; about to add validation
+
+[33mcommit 4e766a06acec114befc65716e1777bb2045e763b[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Wed Sep 30 17:40:26 2020 +0100
+
+    actually converts on the server now
+
+[33mcommit f6be49515546f7449b24cfcdb0cc844caa5975a2[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Wed Sep 30 15:29:25 2020 +0100
+
+    About to install axios
+
+[33mcommit 9ff9e5f4329dac6fe9b102a830c8869e1b157e3b[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Wed Sep 30 15:04:15 2020 +0100
+
+    Basic vuex
+
+[33mcommit 1799bc25cdf5a04685629c4df625a7aa3aa02ee8[m
+Author: francis.wolfe@gmail.com <francis.wolfe@gmail.com>
+Date:   Wed Sep 30 11:03:49 2020 +0100
+
+    Used cli
