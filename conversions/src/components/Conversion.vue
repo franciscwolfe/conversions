@@ -26,22 +26,24 @@
 <script>
 import { mapState } from 'vuex'
 
-var stateModule = "currency";
-
 export default {
   name: 'Conversion',
+  props: {
+    stateModule: String,
+    validationRegex: String
+  },
   components: {
  },  
     computed: {
         ...mapState({
-            valid: state => /^[0-9]+.?[0-9]?[0-9]?$/.test(state[stateModule].inputAmount)
-             && state[stateModule].inputType
-              && state[stateModule].outputType,
-            inputAmount: state => state[stateModule].inputAmount,
-            inputType: state => state[stateModule].inputType,
-            outputType: state => state[stateModule].outputType,
-            types: state => state[stateModule].types,
-            result: state => state[stateModule].result
+            valid(state) { return new RegExp(this.validationRegex).test(state[this.stateModule].inputAmount)
+             && state[this.stateModule].inputType
+              && state[this.stateModule].outputType; },
+            inputAmount(state) { return state[this.stateModule].inputAmount; },
+            inputType(state) { return state[this.stateModule].inputType; },
+            outputType(state) { return state[this.stateModule].outputType; },
+            types(state) { return state[this.stateModule].types; },
+            result(state) { return state[this.stateModule].result; }
         })
     },
     methods: {
