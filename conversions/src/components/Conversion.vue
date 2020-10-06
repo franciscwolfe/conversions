@@ -3,13 +3,13 @@
         <div>
             Convert
             <input :value="inputAmount"  @input="updateInputAmount" placeholder="enter amount">
-            <select :value="inputType"  @input="updateInputType" id="input_currency">
-                <option v-for="option in currencies" :value="option" :key="option">
+            <select :value="inputType"  @input="updateInputType" id="input-type">
+                <option v-for="option in types" :value="option" :key="option">
                     {{ option }}
                 </option>
             </select> to 
-            <select :value="outputType"  @input="updateOutputType" id="output_currency">
-                <option v-for="option in currencies" :value="option" :key="option">
+            <select :value="outputType"  @input="updateOutputType" id="output-type">
+                <option v-for="option in types" :value="option" :key="option">
                     {{ option }}
                 </option>
             </select>
@@ -34,14 +34,14 @@ export default {
  },  
     computed: {
         ...mapState({
-            valid: state => /^[0-9]+.?[0-9]?[0-9]?$/.test(state.currency.inputAmount)
-             && state.currency.inputType
-              && state.currency.outputType,
-            inputAmount: state => state.currency.inputAmount,
-            inputType: state => state.currency.inputType,
-            outputType: state => state.currency.outputType,
-            currencies: state => state.currency.currencies,
-            result: state => state.currency.result
+            valid: state => /^[0-9]+.?[0-9]?[0-9]?$/.test(state[stateModule].inputAmount)
+             && state[stateModule].inputType
+              && state[stateModule].outputType,
+            inputAmount: state => state[stateModule].inputAmount,
+            inputType: state => state[stateModule].inputType,
+            outputType: state => state[stateModule].outputType,
+            types: state => state[stateModule].types,
+            result: state => state[stateModule].result
         })
     },
     methods: {
@@ -59,7 +59,7 @@ export default {
         },
     },
     created() {
-         this.$store.dispatch('loadCurrencies')
+         this.$store.dispatch('loadTypes')
     }   
 }
 </script>
