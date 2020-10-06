@@ -3,7 +3,7 @@
 describe('My First Test', () => {
   it('Visits the app root url', () => {
     cy.visit('/')
-    cy.contains('h1', 'This is a simple demo app to convert numbers.')
+    cy.contains('h1', 'This is a simple app to convert numbers.')
   })
 
   it('Finds convert button disabled when no input number', () => {

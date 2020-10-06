@@ -61,4 +61,7 @@ export default {
 </script>
 
 <style scoped>
+    select {
+        margin: 3px;
+    }
 </style>
