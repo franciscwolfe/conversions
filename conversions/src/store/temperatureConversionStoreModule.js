@@ -17,8 +17,12 @@ export default class TemperatureConversionStoreModule extends ConversionStoreMod
           var searchInputType = state.inputType;
           var searchOutputType = state.outputType;
           var searchInputAmount = state.inputAmount;
-              
-          var result = 10;
+          
+          var inputUnit = units[searchInputType];
+          var outputUnit = units[searchOutputType];
+
+          var result = ((searchInputAmount - inputUnit[0]) /inputUnit[1])  * outputUnit[1] + outputUnit[0];
+
           this.commit(`${modulePath}/updateResult`,
           `${searchInputAmount}${searchInputType} = ${result}${searchOutputType}`,
           { root: true })
