@@ -12,6 +12,7 @@ export default class TemperatureConversionStoreModule extends ConversionStoreMod
           var types = Object.keys(units);
           types.unshift(' ');
           this.commit(`${modulePath}/updateTypes`, ['','C','F','K'], { root: true });
+          this.commit(`${modulePath}/updateLoaded`, true, { root: false });
         },
         convert({state}, modulePath) {
           var searchInputType = state.inputType;

@@ -1,5 +1,5 @@
 <template>
-    <Conversion state-module="temperature" validation-regex="^-?[0-9]+.?[0-9]*$"></Conversion>
+    <Conversion state-module="temperature" validation-regex="^-?[0-9]+\.?[0-9]*$"></Conversion>
 </template>
 
 <script>

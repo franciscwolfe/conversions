@@ -15,7 +15,9 @@
             </select>
             <!--<button @click="convert" type="submit" :disabled="!valid" id="convert">Convert</button>-->
         </div>
-        <pulse-loader v-if="!loaded"></pulse-loader>
+        <div class="loading-area">
+            <pulse-loader v-if="!loaded"></pulse-loader>
+        </div>
         <h1>
             <div id="result">
                 {{ result }}
@@ -73,5 +75,8 @@ export default {
 <style scoped>
     select {
         margin: 3px;
+    }
+    div.loading-area {
+        height: 8px;
     }
 </style>

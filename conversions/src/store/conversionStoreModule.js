@@ -23,7 +23,9 @@ export default class ConversionStoreModule {
         },
         updateTypes (state, types) {
             state.types = types
-            state.loaded = true  
-        },    
+        },
+        updateLoaded (state, loaded) {
+            state.loaded = loaded  
+        },   
     };
 }

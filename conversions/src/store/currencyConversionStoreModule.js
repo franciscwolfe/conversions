@@ -7,7 +7,8 @@ export default class CurrencyConversionStoreModule extends ConversionStoreModule
           Axios.get(`https://localhost:44387/currency`).then(
             response => {
               response.data.unshift('');
-              this.commit(`${modulePath}/updateTypes`, response.data)
+              this.commit(`${modulePath}/updateTypes`, response.data);
+              this.commit(`${modulePath}/updateLoaded`, true, { root: false });
             }
           ).catch((e) => {
             console.log(e);
@@ -23,6 +24,7 @@ export default class CurrencyConversionStoreModule extends ConversionStoreModule
           }
 
           this.cancelToken = Axios.CancelToken.source();
+          this.commit(`${modulePath}/updateLoaded`, false, { root: false });
 
           Axios.get(`https://localhost:44387/currency/Convert?inputCurrency=${searchInputType}&outputCurrency=${searchOutputType}&value=${searchInputAmount}`
                     , { cancelToken: this.cancelToken.token }
@@ -30,6 +32,7 @@ export default class CurrencyConversionStoreModule extends ConversionStoreModule
               this.commit(`${modulePath}/updateResult`, 
               `${searchInputType}${'\xa0'}${Number(searchInputAmount).toFixed(2)} = ${searchOutputType}${'\xa0'}${response.data}`,
               { root: true });
+              this.commit(`${modulePath}/updateLoaded`, true, { root: true });
             }
           ).catch((e) => {
             console.log(e);
