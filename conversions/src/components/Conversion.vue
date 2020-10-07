@@ -2,18 +2,18 @@
     <form onsubmit="return false;">
         <div>
             Convert
-            <input :value="inputAmount"  @input="updateInputAmount" placeholder="enter amount">
-            <select :value="inputType"  @input="updateInputType" id="input-type">
+            <input :value="inputAmount"  @input="updateInputAmount" placeholder="enter amount" @keyup="convert">
+            <select :value="inputType"  @input="updateInputType" id="input-type" @change="convert">
                 <option v-for="option in types" :value="option" :key="option">
                     {{ option }}
                 </option>
             </select> to 
-            <select :value="outputType"  @input="updateOutputType" id="output-type">
+            <select :value="outputType"  @input="updateOutputType" id="output-type" @change="convert">
                 <option v-for="option in types" :value="option" :key="option">
                     {{ option }}
                 </option>
             </select>
-            <button @click="convert" type="submit" :disabled="!valid" id="convert">Convert</button>
+            <!--<button @click="convert" type="submit" :disabled="!valid" id="convert">Convert</button>-->
         </div>
         <pulse-loader v-if="!loaded"></pulse-loader>
         <h1>
@@ -39,9 +39,9 @@ export default {
  },  
     computed: {
         ...mapState({
-            valid(state) { return new RegExp(this.validationRegex).test(state[this.stateModule].inputAmount)
+            valid(state) { return !!(new RegExp(this.validationRegex).test(state[this.stateModule].inputAmount)
              && state[this.stateModule].inputType
-              && state[this.stateModule].outputType; },
+              && state[this.stateModule].outputType); },
             inputAmount(state) { return state[this.stateModule].inputAmount; },
             inputType(state) { return state[this.stateModule].inputType; },
             outputType(state) { return state[this.stateModule].outputType; },
@@ -61,7 +61,7 @@ export default {
             this.$store.commit(`${this.stateModule}/updateOutputType`, e.target.value)
         },
         convert () {
-            this.$store.dispatch(`${this.stateModule}/convert`, this.stateModule)
+            if (this.valid) { this.$store.dispatch(`${this.stateModule}/convert`, this.stateModule); }
         },
     },
     created() {

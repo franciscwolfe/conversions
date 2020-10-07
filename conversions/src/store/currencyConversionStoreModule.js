@@ -18,8 +18,15 @@ export default class CurrencyConversionStoreModule extends ConversionStoreModule
           var searchOutputType = state.outputType;
           var searchInputAmount = state.inputAmount;
     
-          Axios.get(`https://localhost:44387/currency/Convert?inputCurrency=${searchInputType}&outputCurrency=${searchOutputType}&value=${searchInputAmount}`).then(
-            response => {
+          if (typeof this.cancelToken != typeof undefined) {
+            this.cancelToken.cancel("Cancelled due to new request.");
+          }
+
+          this.cancelToken = Axios.CancelToken.source();
+
+          Axios.get(`https://localhost:44387/currency/Convert?inputCurrency=${searchInputType}&outputCurrency=${searchOutputType}&value=${searchInputAmount}`
+                    , { cancelToken: this.cancelToken.token }
+            ).then(response => {
               this.commit(`${modulePath}/updateResult`, 
               `${searchInputType}${'\xa0'}${Number(searchInputAmount).toFixed(2)} = ${searchOutputType}${'\xa0'}${response.data}`,
               { root: true });
