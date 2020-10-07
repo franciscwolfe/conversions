@@ -5,7 +5,8 @@ export default class ConversionStoreModule {
         inputType: null,
         outputType: null,      
         types: [],
-        result: null
+        result: null,
+        loaded: false
     };
     mutations = {
         updateInputAmount (state, inputAmount) {
@@ -21,7 +22,8 @@ export default class ConversionStoreModule {
             state.result = result
         },
         updateTypes (state, types) {
-            state.types = types  
+            state.types = types
+            state.loaded = true  
         },    
     };
 }

@@ -15,6 +15,7 @@
             </select>
             <button @click="convert" type="submit" :disabled="!valid" id="convert">Convert</button>
         </div>
+        <pulse-loader v-if="!loaded"></pulse-loader>
         <h1>
             <div id="result">
                 {{ result }}
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -33,6 +35,7 @@ export default {
     validationRegex: String
   },
   components: {
+      PulseLoader
  },  
     computed: {
         ...mapState({
@@ -43,7 +46,8 @@ export default {
             inputType(state) { return state[this.stateModule].inputType; },
             outputType(state) { return state[this.stateModule].outputType; },
             types(state) { return state[this.stateModule].types; },
-            result(state) { return state[this.stateModule].result; }
+            result(state) { return state[this.stateModule].result; },
+            loaded(state) { return state[this.stateModule].loaded; },
         })
     },
     methods: {
