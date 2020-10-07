@@ -1,33 +1,28 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('My First Test', () => {
-  it('Visits the app root url', () => {
-    cy.visit('/')
-    cy.contains('h1', 'This is a simple app to convert numbers.')
-  })
-
-  it('Finds convert button disabled when no input number', () => {
+describe('Currency Conversion', () => {
+  it('Gets no result when no input number', () => {
     cy.visit('/currency')
     cy.get('input').clear()
     cy.get('#input-type').select('AUD')
     cy.get('#output-type').select('GBP')       
-    cy.get('#convert').should('be.disabled')
+    cy.get('#result').should('be.empty')
   })
 
-  it('Finds convert button disabled when no input currency', () => {
+  it('Gets no result when no input currency', () => {
     cy.visit('/currency')
     cy.get('input').type('100')
     cy.get('#input-type').select('')
     cy.get('#output-type').select('GBP')       
-    cy.get('#convert').should('be.disabled')
+    cy.get('#result').should('be.empty')
   })
 
-  it('Finds convert button disabled when no output currency', () => {
+  it('Gets no result when no output currency', () => {
     cy.visit('/currency')
     cy.get('input').type('100')
     cy.get('#input-type').select('AUD')
     cy.get('#output-type').select('')       
-    cy.get('#convert').should('be.disabled')
+    cy.get('#result').should('be.empty')
   })
 
   it('Does a calculation', () => {
@@ -35,7 +30,6 @@ describe('My First Test', () => {
     cy.get('input').type('100')
     cy.get('#input-type').select('AUD')
     cy.get('#output-type').select('GBP')
-    cy.get('#convert').click()
     cy.contains('#result', '56')
   })
 })

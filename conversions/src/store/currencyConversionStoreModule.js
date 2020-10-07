@@ -12,7 +12,22 @@ export default class CurrencyConversionStoreModule extends ConversionStoreModule
               this.commit(`${modulePath}/updateLoaded`, true, { root: false });
             }
           ).catch((e) => {
-            console.log(e);
+            if (e.response) {
+              this.commit(`${modulePath}/updateLoaded`, true, { root: true });
+
+              var messages = {
+                503 : "Service Unavailable",
+                500 : "Server Error"
+              };
+              var message = messages[e.response.status] ?? "Unknown Error";
+
+              this.commit(`${modulePath}/updateResult`, null, { root: true });
+              this.commit(`${modulePath}/updateMessage`, message, { root: true });
+            } else if (e.message == "Network Error") {
+              this.commit(`${modulePath}/updateLoaded`, true, { root: true });
+              this.commit(`${modulePath}/updateResult`, null, { root: true });
+              this.commit(`${modulePath}/updateMessage`, "Network Error", { root: true });
+            }
           })
         },
         convert({state}, modulePath) {
@@ -48,6 +63,10 @@ export default class CurrencyConversionStoreModule extends ConversionStoreModule
 
               this.commit(`${modulePath}/updateResult`, null, { root: true });
               this.commit(`${modulePath}/updateMessage`, message, { root: true });
+            } else if (e.message == "Network Error") {
+              this.commit(`${modulePath}/updateLoaded`, true, { root: true });
+              this.commit(`${modulePath}/updateResult`, null, { root: true });
+              this.commit(`${modulePath}/updateMessage`, "Network Error", { root: true });
             }
           })
         }

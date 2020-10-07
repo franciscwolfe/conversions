@@ -14,7 +14,6 @@
                     {{ option }}
                 </option>
             </select>
-            <!--<button @click="convert" type="submit" :disabled="!valid" id="convert">Convert</button>-->
         </div>
         <div class="loading-area">
             <pulse-loader v-if="!loaded"></pulse-loader>
