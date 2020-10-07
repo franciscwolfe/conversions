@@ -2,7 +2,8 @@
     <form onsubmit="return false;">
         <div>
             Convert
-            <input :value="inputAmount"  @input="updateInputAmount" placeholder="enter amount" @keyup="convert">
+            <input :value="inputAmount"  @input="updateInputAmount"
+                placeholder="enter amount" v-bind:class="{ invalid: inputAmount && inputAmount.length && !amountValid }">
             <select :value="inputType"  @input="updateInputType" id="input-type" @change="convert">
                 <option v-for="option in types" :value="option" :key="option">
                     {{ option }}
@@ -41,7 +42,8 @@ export default {
  },  
     computed: {
         ...mapState({
-            valid(state) { return !!(new RegExp(this.validationRegex).test(state[this.stateModule].inputAmount)
+            amountValid(state) { return new RegExp(this.validationRegex).test(state[this.stateModule].inputAmount); },
+            valid(state) { return !!(this.amountValid
              && state[this.stateModule].inputType
               && state[this.stateModule].outputType); },
             inputAmount(state) { return state[this.stateModule].inputAmount; },
@@ -55,6 +57,7 @@ export default {
     methods: {
         updateInputAmount (e) {
             this.$store.commit(`${this.stateModule}/updateInputAmount`, e.target.value)
+            this.convert();
         },
         updateInputType (e) {
             this.$store.commit(`${this.stateModule}/updateInputType`, e.target.value)
@@ -78,5 +81,8 @@ export default {
     }
     div.loading-area {
         height: 8px;
+    }
+    .invalid {
+        color: red;
     }
 </style>
