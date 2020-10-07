@@ -1,5 +1,6 @@
 import ConversionStoreModule from './conversionStoreModule'
 import Axios from 'axios'
+const cancelMessage = "Cancelled due to new request.";
 
 export default class CurrencyConversionStoreModule extends ConversionStoreModule {
     actions = {
@@ -20,7 +21,7 @@ export default class CurrencyConversionStoreModule extends ConversionStoreModule
           var searchInputAmount = state.inputAmount;
     
           if (typeof this.cancelToken != typeof undefined) {
-            this.cancelToken.cancel("Cancelled due to new request.");
+            this.cancelToken.cancel(cancelMessage);
           }
 
           this.cancelToken = Axios.CancelToken.source();
@@ -32,10 +33,22 @@ export default class CurrencyConversionStoreModule extends ConversionStoreModule
               this.commit(`${modulePath}/updateResult`, 
               `${searchInputType}${'\xa0'}${Number(searchInputAmount).toFixed(2)} = ${searchOutputType}${'\xa0'}${response.data}`,
               { root: true });
+              this.commit(`${modulePath}/updateMessage`, null, { root: true });
               this.commit(`${modulePath}/updateLoaded`, true, { root: true });
             }
           ).catch((e) => {
-            console.log(e);
+            if (e.response) {
+              this.commit(`${modulePath}/updateLoaded`, true, { root: true });
+
+              var messages = {
+                503 : "Service Unavailable",
+                500 : "Server Error"
+              };
+              var message = messages[e.response.status] ?? "Unknown Error";
+
+              this.commit(`${modulePath}/updateResult`, null, { root: true });
+              this.commit(`${modulePath}/updateMessage`, message, { root: true });
+            }
           })
         }
     }

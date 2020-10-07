@@ -3,7 +3,7 @@
         <div>
             Convert
             <input :value="inputAmount"  @input="updateInputAmount"
-                placeholder="enter amount" v-bind:class="{ invalid: inputAmount && inputAmount.length && !amountValid }">
+                placeholder="enter number" v-bind:class="{ invalid: inputAmount && inputAmount.length && !amountValid }">
             <select :value="inputType"  @input="updateInputType" id="input-type" @change="convert">
                 <option v-for="option in types" :value="option" :key="option">
                     {{ option }}
@@ -24,6 +24,9 @@
                 {{ result }}
             </div>
         </h1>
+        <div id="message">
+            {{ message }}
+        </div>
     </form>
 </template>
 
@@ -51,6 +54,7 @@ export default {
             outputType(state) { return state[this.stateModule].outputType; },
             types(state) { return state[this.stateModule].types; },
             result(state) { return state[this.stateModule].result; },
+            message(state) { return state[this.stateModule].message; },
             loaded(state) { return state[this.stateModule].loaded; },
         })
     },
@@ -83,6 +87,9 @@ export default {
         height: 8px;
     }
     .invalid {
+        color: red;
+    }
+    #message {
         color: red;
     }
 </style>
